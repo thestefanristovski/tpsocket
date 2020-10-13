@@ -23,7 +23,7 @@ public class ChatServer  {
      **/
     public static void main(String args[]){
         ServerSocket listenSocket;
-        users = null;
+        users = new ArrayList<Socket>();
 
         if (args.length != 1) {
             System.out.println("Error in arguments! When compiling, please use: java ChatServer <ChatServer port>");

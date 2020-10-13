@@ -41,12 +41,12 @@ public class ChatClient {
         }
 
 
-        while (true) {
-            ClientSendThread sendThread = new ClientSendThread(echoSocket);
-            ClientReceiveThread receiveThread = new ClientReceiveThread(echoSocket);
-            sendThread.start();
-            receiveThread.start();
-        }
+
+        ClientSendThread sendThread = new ClientSendThread(echoSocket);
+        ClientReceiveThread receiveThread = new ClientReceiveThread(echoSocket);
+        sendThread.start();
+        receiveThread.start();
+
         // NEED TO CLOSE THE SOCKET SOMEWHERE, FIGURE OUR DISCONNECTING echoSocket.close();
     }
 }

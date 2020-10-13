@@ -35,11 +35,13 @@ public class ClientThreadServer
             //reading from the client socket
             socIn = new BufferedReader(
                     new InputStreamReader(clientSocket.getInputStream()));
+            PrintStream socOutDirect = new PrintStream(clientSocket.getOutputStream());
 
             //loop to listen to messages
             while (true) {
                 String line = socIn.readLine();
 
+                //socOutDirect.println(line);
                 //if there is an actual message passed
                 if(!line.isEmpty())
                 {
@@ -49,6 +51,7 @@ public class ClientThreadServer
                         //get the output stream for the socket and pass the message
                         PrintStream socOut = new PrintStream(s.getOutputStream());
                         socOut.println(line);
+
                     }
                 }
             }
