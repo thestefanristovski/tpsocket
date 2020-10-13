@@ -41,8 +41,6 @@ public class ChatServer  {
                 ClientThreadServer ct = new ClientThreadServer(clientSocket);
                 ct.start();
 
-                //VERIFY IF THIS IS HOW TO USE GLOBAL VARIABLES
-                //TREAT HOW IT WORKS WHEN USER DISCONNECTS
             }
         } catch (Exception e) {
             System.err.println("Error in ChatServer:" + e);
