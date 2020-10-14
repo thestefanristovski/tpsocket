@@ -41,7 +41,7 @@ public class ChatClient {
         }
 
 
-
+        System.out.println("Welcome to Messenger! Please enter your username: ");
         ClientSendThread sendThread = new ClientSendThread(echoSocket);
         ClientReceiveThread receiveThread = new ClientReceiveThread(echoSocket);
         sendThread.start();

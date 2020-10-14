@@ -11,17 +11,17 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
-import java.util.List;
-
 
 
 public class ClientThreadServer
         extends Thread {
 
     private Socket clientSocket;
+    private String name;
 
     ClientThreadServer(Socket s) {
         this.clientSocket = s;
+        this.name = "Unknown user";
     }
 
     /**
@@ -36,6 +36,20 @@ public class ClientThreadServer
             socIn = new BufferedReader(
                     new InputStreamReader(clientSocket.getInputStream()));
 
+            boolean hasName = false;
+
+            //first received message is always the name of the user
+            while (true && !hasName)
+            {
+                String line = socIn.readLine();
+                //save the name and exit out of first listen loop
+                if(!line.isEmpty())
+                {
+                    name = line;
+                    hasName = true;
+                }
+            }
+
             //loop to listen to messages
             while (true) {
                 String line = socIn.readLine();
@@ -48,7 +62,7 @@ public class ClientThreadServer
                     {
                         //get the output stream for the socket and pass the message
                         PrintStream socOut = new PrintStream(s.getOutputStream());
-                        socOut.println(line);
+                        socOut.println(name + " : " + line);
 
                     }
                 }
