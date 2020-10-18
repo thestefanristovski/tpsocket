@@ -7,12 +7,10 @@
 
 package stream;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
+import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.Scanner;
 
 
 public class ClientThreadServer
@@ -40,6 +38,12 @@ public class ClientThreadServer
 
             boolean hasName = false;
 
+            //loads history file or creates it if it doesn't exist
+            File chatHistory = new File("history.txt");
+            if (chatHistory.createNewFile()) {
+                System.out.println("New history file created.");
+            }
+
             //first received message is always the name of the user
             while (true && !hasName)
             {
@@ -60,6 +64,22 @@ public class ClientThreadServer
                         }
                         socOut.println(name + " has entered the chat." );
                     }
+
+                    //send the chat history to the user
+                    Scanner chatReader = new Scanner(chatHistory);
+                    String history = "";
+                    while (chatReader.hasNextLine()) {
+                        history += chatReader.nextLine();
+                        history += "\r\n";
+                    }
+                    //get the output stream for the socket and pass the message
+                    PrintStream socOut = null;
+                    try {
+                        socOut = new PrintStream(clientSocket.getOutputStream());
+                    } catch (IOException ioException) {
+                        System.err.println("Error while sending chat history : " + ioException);
+                    }
+                    socOut.println(history);
                 }
             }
 
@@ -76,8 +96,15 @@ public class ClientThreadServer
                         //get the output stream for the socket and pass the message
                         PrintStream socOut = new PrintStream(s.getOutputStream());
                         socOut.println(name + " : " + line);
-
                     }
+
+                    //append the new message to the history file
+                    FileWriter chatWrite = new FileWriter("history.txt", true);
+                    BufferedWriter chatBw = new BufferedWriter(chatWrite);
+                    chatBw.write(name + " : " + line);
+                    chatBw.newLine();
+                    chatBw.close();
+
                 }
             }
         } catch (SocketException e) {
