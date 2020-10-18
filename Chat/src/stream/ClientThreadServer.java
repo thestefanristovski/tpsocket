@@ -8,9 +8,11 @@
 package stream;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.net.SocketException;
 
 
 public class ClientThreadServer
@@ -47,6 +49,17 @@ public class ClientThreadServer
                 {
                     name = line;
                     hasName = true;
+                    for (Socket s:stream.ChatServer.users)
+                    {
+                        //get the output stream for the socket and pass the message
+                        PrintStream socOut = null;
+                        try {
+                            socOut = new PrintStream(s.getOutputStream());
+                        } catch (IOException ioException) {
+                            System.err.println("Error while sending join status message : " + ioException);
+                        }
+                        socOut.println(name + " has entered the chat." );
+                    }
                 }
             }
 
@@ -67,14 +80,24 @@ public class ClientThreadServer
                     }
                 }
             }
+        } catch (SocketException e) {
+            System.err.println("SocketException for user : " + name + " : " + e);
+
+            ChatServer.users.remove(clientSocket);
+            //parse each socket
+            for (Socket s:stream.ChatServer.users)
+            {
+                //get the output stream for the socket and pass the message
+                PrintStream socOut = null;
+                try {
+                    socOut = new PrintStream(s.getOutputStream());
+                } catch (IOException ioException) {
+                    System.err.println("Error while sending left status message : " + ioException);
+                }
+                socOut.println(name + " has left the chat." );
+            }
         } catch (Exception e) {
             System.err.println("Error in ClientThread on Server Side:" + e);
-
-            //remove the socket from the list of connections
-            if (e.toString() == "java.net.SocketException: Connection reset")
-            {
-                ChatServer.users.remove(clientSocket);
-            }
         }
     }
 
