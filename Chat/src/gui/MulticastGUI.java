@@ -1,3 +1,9 @@
+/***
+ * Multicast GUI.
+ *
+ * @since 13/10/20
+ * @author Stefan Ristovksi, Aydin Akaydin
+ */
 package gui;
 
 import java.awt.BorderLayout;
@@ -24,30 +30,76 @@ import stream.MulticastClient;;
 
 public class MulticastGUI extends JFrame {
 
+	/**
+	 * username chosen by client
+	 **/
 	String userName = "";
-	
-	MulticastClient mcc = new MulticastClient(this); 
-	
+
+	/**
+	 * instance of Multicast client
+	 **/
+	MulticastClient mcc = new MulticastClient(this);
+
+	/**
+	 * button to send message
+	 **/
 	public JButton sendButton;
+	/**
+	 * button to join the chat
+	 **/
 	public JButton joinButton;
+	/**
+	 * button to leave the chat
+	 **/
 	public JButton leaveButton;
 
+	/**
+	 * address label
+	 **/
 	JLabel addrLabel = new JLabel("Address :");
+	/**
+	 * port label
+	 **/
 	JLabel portLabel = new JLabel("Port :");
-	
+
+	/**
+	 * text field for IP address.
+	 **/
 	JTextField addrField;
+	/**
+	 * text field for port number
+	 **/
 	JTextField portField;
+	/**
+	 * text field for outgoing message
+	 **/
 	JTextField sendField;
+	/**
+	 * text area to display chat
+	 **/
 	JTextArea chatField;
-	
-	
-	
+
+	/**
+	 * Main frame of window
+	 **/
 	JPanel mainFrame = new JPanel(new BorderLayout());
+	/**
+	 * Top frame of window
+	 **/
 	JPanel northFrame = new JPanel( new FlowLayout());
+	/**
+	 * Bottom frame of window
+	 **/
 	JPanel southFrame = new JPanel(new FlowLayout());
+	/**
+	 * Left frame of windows
+	 **/
 	JPanel westFrame = new JPanel( new BorderLayout());
 
-	
+	/**
+	 * Constructor.
+	 * Initialises the GUI and adds an action listener for the Join button, Send button, leave button, and the text areas
+	 **/
 	public MulticastGUI() {
 		
 		super("Multicast GUI");
@@ -166,11 +218,19 @@ public class MulticastGUI extends JFrame {
 		 this.setVisible(true);
 
 	}
-	
+
+	/**
+	 * Adds a message to the chat window when it's received
+	 * @param message the message received
+	 **/
 	public void writeMessage( String message) {
 		chatField.append(message);
 	}
 
+	/**
+	 * Send method.
+	 * Sends a message as a datagram packet to the other users in the group.
+	 **/
 	public void send() throws IOException {
 		if( userName == "" ) {
 			userName = sendField.getText();
@@ -181,7 +241,11 @@ public class MulticastGUI extends JFrame {
 		}
 		sendField.setText("");	
 	}
-	
+
+	/**
+	 * main method
+	 * @param args  not used.
+	 **/
 	public static void main(String[] args) {
 		
 		new MulticastGUI();

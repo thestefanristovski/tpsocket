@@ -1,8 +1,8 @@
 /***
- * ChatServer
- * TCP server for Chat
- * Date: 13/10/20
- * Authors: Stefan Ristovski Aydin Akaydin
+ * ChatServer.
+ * TCP server for Chat.
+ * @since 13/10/20
+ * @author Stefan Ristovski Aydin Akaydin
  */
 
 package stream;
@@ -13,11 +13,15 @@ import java.util.List;
 
 public class ChatServer  {
 
+    /**
+     * A list containing the sockets of all currently connected users
+     **/
     public static List<Socket> users;
 
     /**
-     * main method
-     * @param args port
+     * main method of the class. Creates a listening socket and accepts new connection.
+     * For each new connection starts a client thread and adds it to the list of current users.
+     * @param args port of server
      *
      **/
     public static void main(String args[]){

@@ -1,8 +1,8 @@
 /***
- * ChatClient
- * TCP client for Client chat
- * Date: 13/10/20
- * Authors: Stefan Ristovski Aydin Akaydin
+ * ChatClient.
+ * TCP client for Client chat.
+ * @since 13/10/20
+ * @author Stefan Ristovski Aydin Akaydin
  */
 package stream;
 
@@ -16,7 +16,8 @@ public class ChatClient {
 
     /**
      *  main method
-     *  accepts a connection, starts up thread for send/receive of messages and passes the socket
+     *  accepts a connection, starts up thread for send/receive of messages and passes the socket.
+     * @param args accepts the host IP address and the port number in that order.
      **/
     public static void main(String[] args) throws IOException {
 
@@ -47,7 +48,6 @@ public class ChatClient {
         sendThread.start();
         receiveThread.start();
 
-        // NEED TO CLOSE THE SOCKET SOMEWHERE, FIGURE OUR DISCONNECTING echoSocket.close();
     }
 }
 

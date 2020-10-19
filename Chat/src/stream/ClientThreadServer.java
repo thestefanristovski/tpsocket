@@ -1,8 +1,8 @@
 /***
- * ClientThreadServer (SERVER SIDE CLIENT THREAD)
- * Thread that receives message from client and sends them to the other clients
- * Date: 14/12/08
- * Authors:
+ * ClientThreadServer (SERVER SIDE CLIENT THREAD).
+ * Thread that receives message from client and sends them to the other clients.
+ * @since 13/10/20
+ * @author Stefan Ristovksi, Aydin Akaydin
  */
 
 package stream;
@@ -16,18 +16,29 @@ import java.util.Scanner;
 public class ClientThreadServer
         extends Thread {
 
+    /**
+     * Client socket
+     **/
     private Socket clientSocket;
+    /**
+     * Username of the client
+     **/
     private String name;
 
+    /**
+     * Constructor. Needed to assign client socket. Username is initialised as unknown.
+     * @param s the client socket
+     **/
     ClientThreadServer(Socket s) {
         this.clientSocket = s;
         this.name = "Unknown user";
     }
 
     /**
-     * receives a request from client then sends an echo to the client
-     * @param clientSocket the client socket
-     * @param users list of sockets associated with other clients
+     * Receives messages from a client. Send messages to this client and all oher currently connected users.
+     * First messages exchanged are the chosen username for client and the chat history saved by the server.
+     * uses the "users" global variable.
+     * @throws SocketException when a user disconnects
      **/
     public void run() {
         try {

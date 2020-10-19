@@ -1,8 +1,8 @@
 /***
- * ClientSendThread (CLIENT SIDE)
- * Thread that reads messages from console and sends them to client side socket
- * Date: 13/10/20
- * Authors: Stefan Ristovksi Aydin Akaydin
+ * ClientSendThread (CLIENT SIDE).
+ * Thread that reads messages from console and sends them to client side socket.
+ * @since 13/10/20
+ * @author Stefan Ristovksi Aydin Akaydin
  */
 
 package stream;
@@ -15,6 +15,9 @@ import java.net.Socket;
 public class ClientSendThread
         extends Thread {
 
+    /**
+     * Client socket
+     **/
     private Socket clientSocket;
 
     ClientSendThread(Socket s) {
@@ -22,8 +25,7 @@ public class ClientSendThread
     }
 
     /**
-     * reads the line from std input and sends the lines to the client socket
-     * @param clientSocket the client socket
+     * Reads the line from std input and sends the lines to the client socket.
      **/
     public void run() {
         try {

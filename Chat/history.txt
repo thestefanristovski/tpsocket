@@ -3,3 +3,4 @@ Stefan : This is the start of the History file.
 Aydin : Hello
 Stefan : Hi
 Pierre : Hi, I'm Pierre
+Stefan : This is new

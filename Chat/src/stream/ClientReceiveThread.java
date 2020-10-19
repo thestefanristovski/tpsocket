@@ -1,8 +1,8 @@
 /***
- * ClientReceiveThread (CLIENT SIDE)
- * Thread that reads incoming messages from socket and prints them on screen
- * Date: 13/10/20
- * Authors: Stefan Ristovksi Aydin Akaydin
+ * ClientReceiveThread (CLIENT SIDE).
+ * Thread that reads incoming messages from socket and prints them on screen.
+ * @since 13/10/20
+ * @author Stefan Ristovksi Aydin Akaydin
  */
 
 package stream;
@@ -15,6 +15,9 @@ import java.net.Socket;
 public class ClientReceiveThread
         extends Thread {
 
+    /**
+     * The client socket.
+     **/
     private Socket clientSocket;
 
     ClientReceiveThread(Socket s) {
@@ -22,8 +25,8 @@ public class ClientReceiveThread
     }
 
     /**
-     * listens to incoming messages from socket
-     * @param clientSocket the client socket
+     * Listens to incoming messages from socket.
+     * Prints messages on the screen.
      **/
     public void run() {
         try {
