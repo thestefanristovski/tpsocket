@@ -52,7 +52,7 @@ public class MulticastGUI extends JFrame {
 		
 		super("Multicast GUI");
 		this.setSize(600,800);
-		//this.setResizable(false);
+		this.setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		mainFrame.setBackground( new Color(147,112,219));
