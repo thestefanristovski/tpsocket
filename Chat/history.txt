@@ -4,3 +4,5 @@ Aydin : Hello
 Stefan : Hi
 Pierre : Hi, I'm Pierre
 Stefan : This is new
+Aydin : Hello
+Stefan : Hey
